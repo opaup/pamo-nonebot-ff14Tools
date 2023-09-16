@@ -9,23 +9,11 @@ from .flow import doFlow
 
 __plugin_meta__ = PluginMetadata(
     name="帕沫的FF14工具包",
-    description=f"""
-usage：
-    一个简单的FF14工具组，目前只实现了市场价格查询，后续可能会更新其他功能。
-    简单指令： /ff market search [道具名] [数据中心]
-    道具名为模糊匹配，数据中心不填默认为莫古力，支持国际服查询
-""".strip(),
+    description="一个简单的FF14工具组，目前只实现了市场价格查询",
     usage="/ff market search [道具名] [数据中心]",
-
     type="ff14",
-    # 发布必填，当前有效类型有：`library`（为其他插件编写提供功能），`application`（向机器人用户提供功能）。
-
     homepage="https://github.com/opaup/pamo-nonebot-ff14Tools",
-    # 发布必填。
-
-    supported_adapters={"~onebot.v11"},
-    # 支持的适配器集合，其中 `~` 在此处代表前缀 `nonebot.adapters.`，其余适配器亦按此格式填写。
-    # 若插件可以保证兼容所有适配器（即仅使用基本适配器功能）可不填写，否则应该列出插件支持的适配器。
+    supported_adapters={"~onebot.v11"}
 )
 
 __zx_plugin_name__ = "帕沫的FF14工具包"

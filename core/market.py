@@ -2,12 +2,14 @@ from ..utils import sendCore
 
 async def searchPrice(cmds):
     
+    noneCmd = '未知指令内容，请使用 ff help 来查询相关指令帮助。'
+
     # 初始化
     length = len(cmds)
     itemName = ''
     dateCenter = ''
     if length < 3:
-        return
+        return noneCmd
     if length >= 3:
         itemName = cmds[2]
         dateCenter = '莫古力'
