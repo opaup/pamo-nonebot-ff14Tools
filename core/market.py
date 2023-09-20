@@ -1,15 +1,15 @@
 from ..utils import sendCore
 
+noOneSale = '没有找到关于【{}】的市场信息\n宋娜？居然没人卖？'
+noSellableItems = ''
+existedRelatedItems = '\n你可能想要搜索：{}'
+
 async def searchPrice(cmds):
     
-    noneCmd = '未知指令内容，请使用 ff help 来查询相关指令帮助。'
-
     # 初始化
     length = len(cmds)
     itemName = ''
     dateCenter = ''
-    if length < 3:
-        return noneCmd
     if length >= 3:
         itemName = cmds[2]
         dateCenter = '莫古力'
@@ -30,9 +30,9 @@ async def searchPrice(cmds):
     # 开始查询市场
     itemId = items[0]['ID']
     extPath = dateCenter + '/' + str(itemId) + '/'
-    data = await sendCore.doSend(extPath, ifHQ)
+    data = await sendCore.doSend(extPath, ifHQ)["listings"]
     if len(data) == 0 :
-        return '没有找到关于【' + itemName + '】的市场信息\n宋娜？居然没人卖？'
+        return noOneSale % (itemName)
     i = 0
     for item in data:
         i+=1
@@ -52,3 +52,66 @@ async def searchPrice(cmds):
         result.append('\n你可能想要搜索：' + otherItems)
 
     return "".join(result)
+
+async def searchInfo(cmds):
+    # 初始化
+    length = len(cmds)
+    itemName = ''
+    dateCenter = ''
+    if length >= 3:
+        itemName = cmds[2]
+        dateCenter = '莫古力'
+    if length >= 4:
+        dateCenter = cmds[3]
+    result = []
+    ifHQ = 'false'
+    if itemName.lower().endswith("hq"):
+        # HQ筛选搜索
+        itemName = itemName[:-2]
+        ifHQ = 'true'
+    items = await sendCore.searchItem(item=itemName)
+    if len(items) == 0 :
+        return '没有找到关于【' + itemName + '】的可售卖道具'
+    result.append('查询【'+ dateCenter +'】中【' + items[0]['Name'] + '】的市场信息：\n')
+    # 开始查询市场
+    itemId = items[0]['ID']
+    extPath = dateCenter + '/' + str(itemId) + '/'
+    data = await sendCore.doSend(extPath, ifHQ)
+    if len(data["listings"]) == 0 :
+        return noOneSale % (itemName)
+    
+    # 未售平均价格（NQ+HQ）
+    currentAveragePrice = data['currentAveragePrice']
+    # 未售平均价格（NQ
+    currentAveragePriceNQ = data['currentAveragePriceNQ']
+    # 未售平均价格（HQ
+    currentAveragePriceHQ = data['currentAveragePriceHQ']
+    # 平均日售量
+    regularSaleVelocity = data['regularSaleVelocity']
+    # NQ 售卖速度
+    nqSaleVelocity = data['nqSaleVelocity']
+    # HQ 售卖速度
+    hqSaleVelocity = data['hqSaleVelocity']
+    # 已售平均价格（NQ+HQ）
+    averagePrice = data['averagePrice']
+    # 已售平均价格（NQ
+    averagePriceNQ = data['averagePriceNQ']
+    # 已售平均价格（HQ
+    averagePriceHQ = data['averagePriceHQ']
+    # 最小销售单价（NQ+HQ）
+    minPrice = data['minPrice']
+    # 最小销售单价（NQ
+    minPriceNQ = data['minPriceNQ']
+    # 最小销售单价（HQ
+    minPriceHQ = data['minPriceHQ']
+    # 最大销售单价（NQ+HQ）
+    maxPrice = data['maxPrice']
+    # 最大销售单价（NQ
+    maxPriceNQ = data['maxPriceNQ']
+    # 最大销售单价（HQ
+    maxPriceHQ = data['maxPriceHQ']
+
+
+
+
+    return

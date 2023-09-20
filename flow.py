@@ -8,27 +8,36 @@ usage：
     道具名为模糊匹配，数据中心不填默认为莫古力，支持国际服查询
 """.strip()
 
-async def doFlow(str):
-    #去除开头空格
+
+async def doFlow(cmdStr):
+    # 去除开头空格
     # str = str.lower().replace('ff','').lstrip()
-    str = str.lower().lstrip()
-    cmds = str.split()
-    marketDic = { 'market', '市场' }
-    helpDic = { 'help', '帮助' }
-    
-    if len(cmds) == 0 :
+    cmdStr = cmdStr.lower().lstrip()
+    cmds = cmdStr.split()
+    marketDic = {'market', '市场'}
+    helpDic = {'help', '帮助'}
+
+    if len(cmds) == 0:
         return noneCmd
     if cmds[0] in marketDic:
         return await marketType(cmds)
     if cmds[0] in helpDic:
         return help
-    else: return noneCmd
+    else:
+        return noneCmd
+
 
 # =======二级指令
-## 市场类
+#  ======市场类
 async def marketType(cmds):
     search = {'search', 'price', '搜索', '价格查询', '查价格', '查价', '查询'}
+    info = {'info', '详情', '信息', '趋势', '行情'}
 
-    if (cmds[1] in search):
+    if len(cmds) < 3:
+        return noneCmd
+    if cmds[1] in search:
         return await searchPrice(cmds)
-    else: return noneCmd
+    if cmds[1] in info:
+        return await searchInfo(cmds)
+    else:
+        return noneCmd
