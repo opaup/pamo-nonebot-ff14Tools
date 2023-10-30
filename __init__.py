@@ -42,7 +42,7 @@ async def use(msg):
     try:
         result = await doFlow(msg)
         return result
-    except:
+    except Exception:
         return errMsg
 
 
