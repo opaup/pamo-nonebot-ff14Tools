@@ -1,4 +1,4 @@
-from nonebot import get_driver,on_command
+from nonebot import get_driver, on_command
 from nonebot.rule import to_me
 from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event
@@ -37,25 +37,26 @@ __plugin_settings__ = {
 
 errMsg = '真寻停止了思考...ff14工具包似乎出现了奇怪的问题'
 
+
 async def use(msg):
     try:
         result = await doFlow(msg)
         return result
-    except:
+    except Exception:
         return errMsg
-    
+
+
 # response = on_command(cmd=r'^(/|\\)ff\s+(.*)', block=True)
 response = on_command(
-    "/ff", aliases={"\\ff", "/FF","\\FF"}, priority=5, block=True
+    "/ff", aliases={"\\ff", "/FF", "\\FF"}, priority=5, block=True
 )
 
 
 @response.handle()
 async def handle_first_receive(bot: Bot, event: Event, state: T_State, arg: Message = CommandArg()):
-    result = ''
     msg = arg.extract_plain_text().strip()
     if msg.startswith('/'):
-        msg = msg[1:] 
+        msg = msg[1:]
     if msg.startswith('\\'):
         msg = msg[1:]
     result = await use(str(msg))
