@@ -7,21 +7,11 @@ from nonebot.params import CommandArg
 from nonebot.plugin import PluginMetadata
 from .flow import doFlow
 
-__plugin_meta__ = PluginMetadata(
-    name="帕沫的FF14工具包",
-    description="一个简单的FF14工具组，目前只实现了市场价格查询",
-    usage="/ff market search [道具名] [数据中心]",
-    type="ff14",
-    homepage="https://github.com/opaup/pamo-nonebot-ff14Tools",
-    supported_adapters={"~onebot.v11"}
-)
-
 __zx_plugin_name__ = "帕沫的FF14工具包"
 __plugin_usage__ = f"""
 usage：
-    一个简单的FF14工具组，目前只实现了市场价格查询，后续可能会更新其他功能。
-    简单指令： /ff market search [道具名] [数据中心]
-    道具名为模糊匹配，数据中心不填默认为莫古力，支持国际服查询
+    一个简单的FF14工具组，目前实现了市场价格查询与当前pvp地图查询。
+    请使用 /ff help 来查询相关指令帮助。
 """.strip()
 __plugin_des__ = f"一个简单的FF14工具包"
 __plugin_cmd__ = ["/ff"]

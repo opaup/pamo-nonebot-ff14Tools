@@ -24,7 +24,7 @@ async def doFlow(cmdStr):
     if len(cmds) == 0:
         return noneCmd
     if cmds[0] in marketDic:
-        return await zcType(cmds)
+        return await marketType(cmds)
     if cmds[0] in helpDic:
         return helpMsg
     if cmds[0] in zcDic:
