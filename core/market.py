@@ -30,7 +30,8 @@ async def searchPrice(cmds):
     # 开始查询市场
     itemId = items[0]['ID']
     extPath = dateCenter + '/' + str(itemId) + '/'
-    data = await sendCore.doSend(extPath, ifHQ)["listings"]
+    data = await sendCore.doSend(extPath, ifHQ)
+    data = data["listings"]
     if len(data) == 0:
         return noOneSale % itemName
     i = 0
