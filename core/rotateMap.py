@@ -19,9 +19,9 @@ def get_zc():
     if remainder == 0:
         result_map = "碎冰冰"
     if remainder == 1:
-        result_map = "尘封秘岩"
-    if remainder == 2:
         result_map = "大草原"
+    if remainder == 2:
+        result_map = "尘封秘岩"
     msg = [
         f"今天是{result_map}哦，狼王们快冲！",
         f"小真寻夜观天象，原来今天的战场是...{result_map}",
